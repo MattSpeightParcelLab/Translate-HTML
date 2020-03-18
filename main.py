@@ -1,4 +1,6 @@
 import processes.parser as parser
+import processes.translate as trans
+
 
 def loadFile(filename):
     file = open(filename, "r")
@@ -17,3 +19,11 @@ filetext = parser.parse(loadFile("input/"+filename+".html"))
 #print(filetext)
 wrtieTransHTML(filetext, "out")#raw_input("Document Name: "))
 #print(trans.translate("Car","fr"))
+
+
+
+###############################################
+#################### DEEPL ####################
+###############################################
+
+#trans.deeplScrapper("car","en","de")
