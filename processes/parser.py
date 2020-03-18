@@ -2,31 +2,30 @@ from HTMLParser import HTMLParser
 import translate as trans
 import re
 
-words = list()
-lang = raw_input("Lang: ")
 
+
+words = list()
+
+langCurrent = raw_input("Current Lang: ")
+lang = raw_input("Translate to Lang: ")
+words.append(("="+langCurrent,"="+lang))
 
 
 voidList = ['\n','\n\n','\n\n\n', ' ','  ','   ']
 
-# create a subclass and override the handler methods
 class HTMLParser(HTMLParser):
 
     def handle_data(self, data):
         proceessedText =  checks(data)
-        print(proceessedText)
 
-        #translation = trans.translate(, lang)
-        
         try:
-            if proceessedText.find('\n') == -1:
-                translation = trans.translate(proceessedText, lang)
-                words.append((data,translation))
+                translation = trans.translate(proceessedText, lang).encode('utf-8').strip()
+                words.append((data.strip(),translation))
 
         except:
+            #print("ERROR")
             return None
 
-# instantiate the parser and fed it some HTML
 parser = HTMLParser()
 
 def changeWord(text):
@@ -38,16 +37,16 @@ def changeWord(text):
 def parse(text):
     
     parser.feed(text)
-    print(words)
+    #print(words)
     text = changeWord(text)
     return text
 
 def processText(sep):
 
     for x in range(len(sep)):
-                if re.match("\n*", sep[x], re.MULTILINE) or re.match("\b*", sep[x], re.MULTILINE):
-                    sep[x] = ' '
-                    print("hit")
+                if re.match("\n", sep[x], re.MULTILINE) or re.match("\b", sep[x], re.MULTILINE):
+                    sep[x] = ''
+                    #print("hit")
 
     text = "  ".join(sep)
 

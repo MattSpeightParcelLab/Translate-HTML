@@ -9,10 +9,11 @@ def wrtieTransHTML(text, filename):
     file.write(text)
     file.close() 
 
-filename = str("bose")#raw_input("Filename: "))
+filename = raw_input("Filename: ")
+#str("bose")
 
 
 filetext = parser.parse(loadFile("input/"+filename+".html"))
 #print(filetext)
-wrtieTransHTML(filetext, raw_input("Document Name: "))
+wrtieTransHTML(filetext, "out")#raw_input("Document Name: "))
 #print(trans.translate("Car","fr"))
